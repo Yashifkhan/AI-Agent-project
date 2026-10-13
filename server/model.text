@@ -1,0 +1,562 @@
+{
+  "chat_models": [
+    {
+      "rank": 1,
+      "model_id": "gemini-3.8-flash",
+      "name": "models/gemini-3.8-flash",
+      "display_name": "Gemini 3.8 Flash",
+      "description": "Gemini 3.8 Flash",
+      "version": "3.0",
+      "input_token_limit": 1048576,
+      "output_token_limit": 65536,
+      "parameters": {
+        "temperature": 1.0,
+        "max_temperature": 2.0,
+        "top_p": 0.95,
+        "top_k": 64,
+        "thinking": true
+      },
+      "supported_actions": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "General-purpose chatbots, coding, reasoning, and AI agents"
+    },
+    {
+      "rank": 2,
+      "model_id": "gemini-3.1-pro-preview",
+      "name": "models/gemini-3.1-pro-preview",
+      "display_name": "Gemini 3.1 Pro Preview",
+      "description": "Gemini 3.1 Pro Preview",
+      "version": "3.1-pro-preview-01-2026",
+      "input_token_limit": 1048576,
+      "output_token_limit": 65536,
+      "parameters": {
+        "temperature": 1.0,
+        "max_temperature": 2.0,
+        "top_p": 0.95,
+        "top_k": 64,
+        "thinking": true
+      },
+      "supported_actions": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "Complex reasoning, coding, and multi-step planning"
+    },
+    {
+      "rank": 3,
+      "model_id": "gemini-3-flash-preview",
+      "name": "models/gemini-3-flash-preview",
+      "display_name": "Gemini 3 Flash Preview",
+      "description": "Gemini 3 Flash Preview",
+      "version": "3-flash-preview-12-2025",
+      "input_token_limit": 1048576,
+      "output_token_limit": 65536,
+      "parameters": {
+        "temperature": 1.0,
+        "max_temperature": 2.0,
+        "top_p": 0.95,
+        "top_k": 64,
+        "thinking": true
+      },
+      "supported_actions": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "General-purpose tasks and agent experiments"
+    },
+    {
+      "rank": 4,
+      "model_id": "gemini-3.7-flash",
+      "name": "models/gemini-3.7-flash",
+      "display_name": "Gemini 3.7 Flash",
+      "description": "Gemini 3.7 Flash",
+      "version": "3.7-flash-08-2026",
+      "input_token_limit": 1048576,
+      "output_token_limit": 65536,
+      "parameters": {
+        "temperature": 1.0,
+        "max_temperature": 2.0,
+        "top_p": 0.95,
+        "top_k": 64,
+        "thinking": true
+      },
+      "supported_actions": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "Coding, tool workflows, and AI agents"
+    },
+    {
+      "rank": 5,
+      "model_id": "gemini-3.6-flash",
+      "name": "models/gemini-3.6-flash",
+      "display_name": "Gemini 3.6 Flash",
+      "description": "Gemini 3.6 Flash",
+      "version": "3.6-flash-07-2026",
+      "input_token_limit": 1048576,
+      "output_token_limit": 65536,
+      "parameters": {
+        "temperature": 1.0,
+        "max_temperature": 2.0,
+        "top_p": 0.95,
+        "top_k": 64,
+        "thinking": true
+      },
+      "supported_actions": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "Everyday chatbot tasks and general-purpose reasoning"
+    }
+  ],
+  "embedding_models": [
+    {
+      "rank": 1,
+      "model_id": "gemini-embedding-2",
+      "name": "models/gemini-embedding-2",
+      "display_name": "Gemini Embedding 2",
+      "description": "Obtain a distributed representation of multimodal content.",
+      "version": "2",
+      "input_token_limit": 8192,
+      "output_token_limit": 1,
+      "parameters": {
+        "temperature": null,
+        "max_temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "thinking": null
+      },
+      "supported_actions": [
+        "embedContent",
+        "countTextTokens",
+        "countTokens",
+        "asyncBatchEmbedContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "Multimodal embeddings and semantic retrieval",
+      "availability_note": "Verify that this exact model ID is available to your API account."
+    },
+    {
+      "rank": 2,
+      "model_id": "gemini-embedding-2-preview",
+      "name": "models/gemini-embedding-2-preview",
+      "display_name": "Gemini Embedding 2 Preview",
+      "description": "Obtain a distributed representation of multimodal content.",
+      "version": "2",
+      "input_token_limit": 8192,
+      "output_token_limit": 1,
+      "parameters": {
+        "temperature": null,
+        "max_temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "thinking": null
+      },
+      "supported_actions": [
+        "embedContent",
+        "countTextTokens",
+        "countTokens",
+        "asyncBatchEmbedContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "Experimental multimodal embeddings and retrieval"
+    },
+    {
+      "rank": 3,
+      "model_id": "gemini-embedding-001",
+      "name": "models/gemini-embedding-001",
+      "display_name": "Gemini Embedding 001",
+      "description": "Obtain a distributed representation of a text.",
+      "version": "001",
+      "input_token_limit": 2048,
+      "output_token_limit": 1,
+      "parameters": {
+        "temperature": null,
+        "max_temperature": null,
+        "top_p": null,
+        "top_k": null,
+        "thinking": null
+      },
+      "supported_actions": [
+        "embedContent",
+        "countTextTokens",
+        "countTokens",
+        "asyncBatchEmbedContent"
+      ],
+      "endpoints": null,
+      "labels": null,
+      "default_checkpoint_id": null,
+      "checkpoints": null,
+      "use_case": "Text embeddings, document search, and text-based RAG"
+    }
+  ]
+}
+
+
+
+
+
+
+
+groq_model
+
+{
+  "models": [
+    {
+      "rank": 1,
+      "id": "openai/gpt-oss-120b",
+      "name": "GPT OSS 120B",
+      "owned_by": "OpenAI",
+      "active": true,
+      "context_window": 131072,
+      "max_completion_tokens": 65536,
+      "context_length": 131072,
+      "max_output_length": 65536,
+      "input_modalities": ["text"],
+      "output_modalities": ["text"],
+      "supported_sampling_parameters": [
+        "temperature",
+        "top_p",
+        "stop",
+        "seed",
+        "max_tokens"
+      ],
+      "supported_features": [
+        "tools",
+        "json_mode",
+        "structured_outputs",
+        "reasoning"
+      ],
+      "pricing": {
+        "prompt": "0.00000015",
+        "completion": "0.0000006",
+        "image": "0",
+        "request": "0",
+        "input_cache_read": "0.000000075"
+      },
+      "best_for": [
+        "Advanced AI agents",
+        "Complex reasoning",
+        "Tool calling",
+        "Structured JSON generation",
+        "Multi-step planning"
+      ],
+      "recommendation": "Best overall candidate for complex chatbot and agent tasks based on the supplied specifications"
+    },
+    {
+      "rank": 2,
+      "id": "qwen/qwen3.8-27b",
+      "name": "Qwen 3.8 27B",
+      "owned_by": "Alibaba Cloud",
+      "active": true,
+      "context_window": 131072,
+      "max_completion_tokens": 16384,
+      "context_length": 131072,
+      "max_output_length": 16384,
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "output_modalities": ["text"],
+      "supported_sampling_parameters": [
+        "temperature",
+        "top_p",
+        "stop",
+        "seed",
+        "max_tokens"
+      ],
+      "supported_features": [
+        "tools",
+        "json_mode",
+        "reasoning"
+      ],
+      "pricing": {
+        "prompt": "0.0000008",
+        "completion": "0.000004",
+        "image": "0",
+        "request": "0",
+        "input_cache_read": "0.0000004"
+      },
+      "best_for": [
+        "Multimodal chatbot applications",
+        "Image and text understanding",
+        "Tool calling",
+        "Reasoning workflows"
+      ],
+      "recommendation": "Best multimodal candidate in this selection"
+    },
+    {
+      "rank": 3,
+      "id": "openai/gpt-oss-20b",
+      "name": "GPT OSS 20B",
+      "owned_by": "OpenAI",
+      "active": true,
+      "context_window": 131072,
+      "max_completion_tokens": 65536,
+      "context_length": 131072,
+      "max_output_length": 65536,
+      "input_modalities": ["text"],
+      "output_modalities": ["text"],
+      "supported_sampling_parameters": [
+        "temperature",
+        "top_p",
+        "stop",
+        "seed",
+        "max_tokens"
+      ],
+      "supported_features": [
+        "tools",
+        "json_mode",
+        "structured_outputs",
+        "reasoning"
+      ],
+      "pricing": {
+        "prompt": "0.000000075",
+        "completion": "0.0000003",
+        "image": "0",
+        "request": "0",
+        "input_cache_read": "0.0000000375"
+      },
+      "best_for": [
+        "Everyday AI agents",
+        "Structured outputs",
+        "Tool calling",
+        "Classification",
+        "Budget-conscious applications"
+      ],
+      "recommendation": "Strong alternative to GPT OSS 120B at half the listed input and output token prices"
+    },
+    {
+      "rank": 4,
+      "id": "openai/gpt-oss-safeguard-20b",
+      "name": "Safety GPT OSS 20B",
+      "owned_by": "OpenAI",
+      "active": true,
+      "context_window": 131072,
+      "max_completion_tokens": 65536,
+      "context_length": 131072,
+      "max_output_length": 65536,
+      "input_modalities": ["text"],
+      "output_modalities": ["text"],
+      "supported_sampling_parameters": [
+        "temperature",
+        "top_p",
+        "stop",
+        "seed",
+        "max_tokens"
+      ],
+      "supported_features": [
+        "tools",
+        "json_mode",
+        "structured_outputs",
+        "reasoning"
+      ],
+      "pricing": {
+        "prompt": "0.000000075",
+        "completion": "0.0000003",
+        "image": "0",
+        "request": "0",
+        "input_cache_read": "0.0000000375"
+      },
+      "best_for": [
+        "Safety-related classification",
+        "Policy evaluation",
+        "Safety checks in AI workflows"
+      ],
+      "recommendation": "Use for safety-related tasks rather than assuming it is the best general-purpose chatbot model"
+    },
+    {
+      "rank": 5,
+      "id": "allam-2-7b",
+      "name": "ALLaM-2-7B",
+      "owned_by": "SDAIA",
+      "active": true,
+      "context_window": 4096,
+      "max_completion_tokens": 4096,
+      "context_length": 4096,
+      "max_output_length": 4096,
+      "input_modalities": ["text"],
+      "output_modalities": ["text"],
+      "supported_sampling_parameters": [
+        "temperature",
+        "top_p",
+        "stop",
+        "seed",
+        "max_tokens"
+      ],
+      "supported_features": [
+        "json_mode"
+      ],
+      "best_for": [
+        "Simple text-generation tasks",
+        "Basic chatbot experiments",
+        "JSON-mode experiments"
+      ],
+      "recommendation": "A smaller alternative for simpler workloads; its context window and listed features are more limited"
+    }
+  ]
+}
+
+
+nvidia_model
+
+{
+  "models": [
+    {
+      "rank": 1,
+      "id": "moonshotai/kimi-k3",
+      "name": "Kimi K3",
+      "owned_by": "Moonshot AI",
+      "total_parameters": "2.8T",
+      "active_parameters": "104B",
+      "context_window": 1048576,
+      "max_output_tokens": null,
+      "input_modalities": ["text", "image"],
+      "output_modalities": ["text"],
+      "supported_features": [
+        "reasoning",
+        "agentic_workflows",
+        "coding",
+        "tool_orchestration",
+        "long_context",
+        "multimodal_understanding"
+      ],
+      "best_for": "Advanced AI agents, complex reasoning, coding, and long-running workflows",
+      "recommendation": "Best overall candidate for advanced agent development"
+    },
+    {
+      "rank": 2,
+      "id": "deepseek-ai/deepseek-v4.1-flash",
+      "name": "DeepSeek V4.1 Flash",
+      "owned_by": "DeepSeek AI",
+      "total_parameters": "552B",
+      "active_parameters": {
+        "input": "8B",
+        "output": "16B"
+      },
+      "context_window": 1000000,
+      "max_output_tokens": 384000,
+      "input_modalities": ["text", "image"],
+      "output_modalities": ["text"],
+      "supported_features": [
+        "reasoning",
+        "tool_calling",
+        "json_output",
+        "multimodal_understanding",
+        "coding",
+        "agentic_workflows"
+      ],
+      "best_for": "Fast AI agents, coding, reasoning, multimodal tasks, and cost-conscious applications",
+      "recommendation": "Strong candidate for an efficient production chatbot"
+    },
+    {
+      "rank": 3,
+      "id": "z-ai/glm-5.3",
+      "name": "GLM-5.3",
+      "owned_by": "Z.ai",
+      "total_parameters": "753B",
+      "active_parameters": null,
+      "context_window": 1048576,
+      "max_output_tokens": 131072,
+      "input_modalities": ["text"],
+      "output_modalities": ["text"],
+      "supported_features": [
+        "reasoning",
+        "tool_calling",
+        "coding",
+        "long_horizon_agents",
+        "long_context"
+      ],
+      "best_for": "Software engineering, complex coding, and multi-step agent workflows",
+      "recommendation": "Strong choice for coding agents and complex automation"
+    },
+    {
+      "rank": 4,
+      "id": "nvidia/nemotron-3-ultra-550b-a55b",
+      "name": "NVIDIA Nemotron 3 Ultra 550B A55B",
+      "owned_by": "NVIDIA",
+      "total_parameters": "550B",
+      "active_parameters": "55B",
+      "context_window": 1048576,
+      "max_output_tokens": null,
+      "input_modalities": ["text"],
+      "output_modalities": ["text"],
+      "supported_features": [
+        "reasoning",
+        "tool_use",
+        "multi_step_planning",
+        "agentic_workflows",
+        "long_context",
+        "RAG"
+      ],
+      "best_for": "Enterprise AI agents, complex workflows, and long-document analysis",
+      "recommendation": "Strong candidate for advanced enterprise agent systems"
+    },
+    {
+      "rank": 5,
+      "id": "google/gemma-4-31b-it",
+      "name": "Gemma 4 31B IT",
+      "owned_by": "Google",
+      "total_parameters": "30.7B",
+      "active_parameters": null,
+      "context_window": 262144,
+      "max_output_tokens": null,
+      "input_modalities": ["text", "image"],
+      "output_modalities": ["text"],
+      "supported_features": [
+        "reasoning",
+        "coding",
+        "function_calling",
+        "multimodal_understanding",
+        "RAG",
+        "instruction_following"
+      ],
+      "best_for": "General-purpose chatbots, coding, document understanding, and smaller-scale deployments",
+      "recommendation": "Good alternative when you want a substantially smaller model"
+    }
+  ],
+  "notes": {
+    "ranking_basis": "Model capabilities, published documentation, and suitability for chatbot and agent development; not a head-to-head benchmark.",
+    "token_limits": "Limits documented by upstream model providers may differ from limits enforced by your API gateway.",
+    "unknown_values": "null means the exact value was not verified for the selected API endpoint.",
+    "production_advice": "Test tool calling, structured JSON, latency, reliability, and cost on your own use cases before choosing a production model."
+  }
+}
