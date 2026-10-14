@@ -1,3 +1,5 @@
+gemini_model 
+
 {
   "chat_models": [
     {
