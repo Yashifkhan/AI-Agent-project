@@ -123,9 +123,11 @@ def classify_source(user_message: str) -> QueryRoute:
     # print("query filter after result ->>",response)
     return response
 
-query="what is the full form **HBSE** board"
+# query="what is the full form **HBSE** board"
 # query="what is the process of remove the student from routes in transport , and tell me latest news of hbsc board"
 # query="kya kal baris ho skti hai ,m kal chutty marne ki soch rha hu"
 # query="get the top 5 student, which have panding more fee to another student"
+# query="diwali fastival holiday date and day in 2026"
+query="what si the gold price today ,22 karet gold and 24 karet gold"
 result=classify_source({"user":query})
 print("model final result ->>",result)

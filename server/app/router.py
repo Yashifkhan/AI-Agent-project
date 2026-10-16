@@ -38,11 +38,11 @@ def route_query(query: str, model_result) -> dict:
 
     results = []
 
-    for source in sources:
+    for source in sources:        
         tool = SOURCE_TO_TOOL[source]
-
         print(f"Routing to: {source}")
-
+        
+        # tool calling 
         result = tool(query)
         # print("tool result after query check  -->>",result[0]["text"])
 
