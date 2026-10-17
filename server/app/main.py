@@ -120,7 +120,7 @@ def classify_source(user_message: str) -> QueryRoute:
     # return query_router_llm.invoke(prompt)
     result= query_router_llm.invoke(prompt)
     response = route_query(query, result)
-    # print("query filter after result ->>",response)
+    print("query filter after vc db +| llm ->>",response)
     return response
 
 # query="what is the full form **HBSE** board"
@@ -128,6 +128,8 @@ def classify_source(user_message: str) -> QueryRoute:
 # query="kya kal baris ho skti hai ,m kal chutty marne ki soch rha hu"
 # query="get the top 5 student, which have panding more fee to another student"
 # query="diwali fastival holiday date and day in 2026"
-query="what si the gold price today ,22 karet gold and 24 karet gold"
+# query="what si the gold price today ,22 karet gold and 24 karet gold"
+# query="what is the process of new student addmission "
+query="who to enable the transport for student"
 result=classify_source({"user":query})
 print("model final result ->>",result)
