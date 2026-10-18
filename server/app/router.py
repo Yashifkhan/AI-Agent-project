@@ -13,7 +13,45 @@ SOURCE_TO_TOOL = {
     "llm_knowledge": llm_knowledge_tool,
 }
 
-def route_query(query: str, model_result) -> dict:
+
+def route_query(query: str, model_result):
+    sources = model_result.sources
+    reason = model_result.reason
+
+    invalid_sources = [
+        source for source in sources
+        if source not in SOURCE_TO_TOOL
+    ]
+
+    if invalid_sources:
+        raise ValueError(f"Unknown sources: {invalid_sources}")
+
+    results = []
+
+    for source in sources:
+        tool = SOURCE_TO_TOOL[source]
+        print(f"Routing to: {source}")
+
+        try:
+            tool_result = tool(query)
+            print("tool_result")
+        except Exception as e:
+            print(f"Tool error ({source}): {e}")
+            tool_result = "This source could not provide a result."
+
+        results.append({
+            "source": source,
+            "result": tool_result,
+        })
+
+    return {
+        "query": query,
+        "reason": reason,
+        "results": results,
+    }
+
+
+# def route_query(query: str, model_result) -> dict:
     print("pass query to correct route ...")
 
     # Convert Pydantic model to a Python dictionary.
@@ -54,5 +92,5 @@ def route_query(query: str, model_result) -> dict:
     return {
         "query": query,
         "reason": model_result.get("reason", ""),
-        "results": results[0]["result"][0]["text"],
+        "results": results
     }

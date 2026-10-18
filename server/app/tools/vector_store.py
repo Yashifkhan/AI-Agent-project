@@ -26,7 +26,6 @@ def print_main_answer(retrieved_docs):
 
 def retrieve_relevant_data(query: str, k: int = 4) -> list:
     """Fetch the most relevant PDF chunks from Pinecone."""
-    print("vc db tool calling ...")
 
     documents = vector_store.similarity_search(
         query=query,

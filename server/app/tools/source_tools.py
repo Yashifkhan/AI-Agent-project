@@ -29,6 +29,7 @@ def school_db_tool(query: str) -> str:
 
 def vector_db_tool(query: str) -> str:
     """Retrieve school documentation and answer the user's question."""
+    # print("vector db calling ..")
 
     try:
         # Step 1: Retrieve relevant chunks from Pinecone.
@@ -37,6 +38,9 @@ def vector_db_tool(query: str) -> str:
         if not documents:
             return "I couldn't find relevant information in the school guide."
 
+
+        # for i, doc in enumerate(documents, start=1):
+        #     print(f"\nRetrieved chunk {i}:\n{doc.page_content}")
         # Step 2: Combine retrieved chunks into context.
         context = "\n\n".join(
             f"Page: {doc.metadata.get('page', 'unknown')}\n"
@@ -76,17 +80,17 @@ def vector_db_tool(query: str) -> str:
         else:
             answer = ""
 
-        print("Answer:", answer)
+        # print("Answer:", answer)
         return answer
 
     except Exception as e:
         print(f"Vector DB tool error: {e}")
         return "Sorry, I couldn't retrieve an answer from the school guide."
 
-
 # web search tool 
 def web_search_tool(query: str) -> str:
     """Search the web and use Gemini to generate a concise answer."""
+    print("web search tool ..")
 
     try:
         # Step 1: Search the web.
@@ -131,7 +135,7 @@ def web_search_tool(query: str) -> str:
 
         # Step 5: Return only the answer text.
         answer = response.content
-        print("answer",answer)
+        # print("answer",answer)
 
         if isinstance(answer, str):
             return answer.strip()
@@ -155,23 +159,38 @@ def web_search_tool(query: str) -> str:
 # llm knowladge base tool
 def llm_knowledge_tool(query: str) -> str:
     """Answer general knowledge questions using Gemini."""
-    try:
-        response = gemini_llm.invoke(
-            [
-                (
-                    "system",
-                    "You are a helpful AI assistant. "
-                    "Answer general knowledge questions accurately "
-                    "in a short, clear, useful way. "
-                    "Prefer 2-4 sentences. "
-                    "If a question is ambiguous, ask for clarification. "
-                    "Do not invent facts."
-                ),
-                ("human", query),
-            ]
-        )
+    print("llm knowladge base ..")
 
-        return response.content
+    try:
+        response = gemini_llm.invoke([
+            (
+                "system",
+                "You are a helpful AI assistant. "
+                "Answer general knowledge questions accurately "
+                "in a short, clear, useful way. "
+                "Prefer 2-4 sentences. "
+                "If a question is ambiguous, ask for clarification. "
+                "Do not invent facts."
+            ),
+            ("human", query),
+        ])
+
+        content = response.content
+
+        if isinstance(content, str):
+            return content.strip()
+
+        if isinstance(content, list):
+            return "\n".join(
+                block["text"]
+                for block in content
+                if isinstance(block, dict)
+                and block.get("type") == "text"
+                and isinstance(block.get("text"), str)
+            ).strip()
+
+        print("content",content)
+        return str(content)
 
     except Exception as e:
         print(f"Gemini error: {e}")
