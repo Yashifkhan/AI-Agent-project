@@ -4,6 +4,8 @@ from app.tools.source_tools import (
     vector_db_tool,
     llm_knowledge_tool,
 )
+from app.memory.sort_term_memory import format_history
+
 
 # Allow only known, registered sources.
 SOURCE_TO_TOOL = {
@@ -13,8 +15,43 @@ SOURCE_TO_TOOL = {
     "llm_knowledge": llm_knowledge_tool,
 }
 
+def route_query(query: str, model_result, history: list | None = None):
+    sources = model_result.sources
+    reason = model_result.reason
 
-def route_query(query: str, model_result):
+    invalid_sources = [s for s in sources if s not in SOURCE_TO_TOOL]
+    if invalid_sources:
+        raise ValueError(f"Unknown sources: {invalid_sources}")
+
+    results = []
+
+    for source in sources:
+        print(f"Routing to: {source}")
+        tool = SOURCE_TO_TOOL[source]
+
+        # Sirf llm_knowledge ko conversation context do
+        if source == "llm_knowledge" and history:
+            tool_query = (
+                "Previous conversation:\n"
+                f"{format_history(history)}\n\n"
+                f"Current user message: {query}\n\n"
+                "Answer the current message using the previous conversation "
+                "when it is relevant."
+            )
+        else:
+            tool_query = query
+
+        try:
+            tool_result = tool(tool_query)
+        except Exception as e:
+            print(f"Tool error ({source}): {e}")
+            tool_result = "This source could not provide a result."
+
+        results.append({"source": source, "result": tool_result})
+
+    return {"query": query, "reason": reason, "results": results}
+
+# def route_query(query: str, model_result):
     sources = model_result.sources
     reason = model_result.reason
 
@@ -29,6 +66,7 @@ def route_query(query: str, model_result):
     results = []
 
     for source in sources:
+        print("llm select the source -->>",source)
         tool = SOURCE_TO_TOOL[source]
         print(f"Routing to: {source}")
 
