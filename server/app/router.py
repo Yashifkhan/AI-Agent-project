@@ -5,6 +5,7 @@ from app.tools.source_tools import (
     llm_knowledge_tool,
 )
 from app.memory.sort_term_memory import format_history
+from app.graph.state import TicketAgentState
 
 
 # Allow only known, registered sources.
@@ -14,8 +15,15 @@ SOURCE_TO_TOOL = {
     "vector_db": vector_db_tool,
     "llm_knowledge": llm_knowledge_tool,
 }
+def route_query(state: TicketAgentState):
+    print("data reached router function -->>", list(state.keys()))
 
-def route_query(query: str, model_result, history: list | None = None):
+    model_result = state.get("model_result")
+    if model_result is None:
+        raise ValueError("model_result missing: classify_source ne state me nahi daala")
+
+    query = state["user_message"]
+    history = state.get("history", [])
     sources = model_result.sources
     reason = model_result.reason
 
@@ -49,7 +57,58 @@ def route_query(query: str, model_result, history: list | None = None):
 
         results.append({"source": source, "result": tool_result})
 
-    return {"query": query, "reason": reason, "results": results}
+    return {
+        "sources": sources,
+        "reason": reason,
+        "tool_results": results,
+    }
+    print("data reched router function -->>",state)
+    
+    model_result=state["model_result"]
+    history = state.get("history", [])
+    query = state["query"]
+
+    sources = model_result.sources
+    reason = model_result.reason
+
+    invalid_sources = [s for s in sources if s not in SOURCE_TO_TOOL]
+    if invalid_sources:
+        raise ValueError(f"Unknown sources: {invalid_sources}")
+
+    results = []
+
+    for source in sources:
+        print(f"Routing to: {source}")
+        tool = SOURCE_TO_TOOL[source]
+
+        # Sirf llm_knowledge ko conversation context do
+        if source == "llm_knowledge" and history:
+            tool_query = (
+                "Previous conversation:\n"
+                f"{format_history(history)}\n\n"
+                f"Current user message: {query}\n\n"
+                "Answer the current message using the previous conversation "
+                "when it is relevant."
+            )
+        else:
+            tool_query = query
+
+        try:
+            tool_result = tool(tool_query)
+        except Exception as e:
+            print(f"Tool error ({source}): {e}")
+            tool_result = "This source could not provide a result."
+
+        results.append({"source": source, "result": tool_result})
+        
+    return {
+        "query": query,
+        "sources": sources,
+        "reason": reason,
+        "results": []
+    }
+
+    # return {"query": query, "reason": reason, "results": results}
 
 # def route_query(query: str, model_result):
     sources = model_result.sources

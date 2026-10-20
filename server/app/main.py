@@ -14,6 +14,7 @@ from app.router import route_query
 load_dotenv()
 from app.memory.sort_term_memory import save_message
 from app.tools.additonal_fun import extract_text
+from app.graph.state import TicketAgentState
 from app.memory.sort_term_memory import (
     get_history,
     save_message,
@@ -34,8 +35,8 @@ gemini_llm = ChatGoogleGenerativeAI(
 )
 
 groq_llm = ChatGroq(
-    # model="openai/gpt-oss-20b",
-    model="openai/gpt-oss-120b",
+    model="openai/gpt-oss-20b",
+    # model="openai/gpt-oss-120b",
     temperature=0,
 )
 
@@ -251,13 +252,14 @@ def safe_route(messages):
         reason="Router failed, using general knowledge fallback.",
     )
 
-def classify_source(data: dict):
-    user_message = data["user"]
-    thread_id = data["thread_id"]
+def classify_source(state: TicketAgentState):
+    user_message = state["user_message"]
+    thread_id = state["thread_id"]
 
+    print("user query -->> :", user_message)
     print("User query analysis...")
 
-    # 1. Pehle history aur attempts padho
+    # 1. History aur attempts padho
     history = get_history(thread_id)
     attempts = get_attempts(thread_id)
 
@@ -272,7 +274,7 @@ def classify_source(data: dict):
     result = safe_route(messages)
     print("Classification:", result)
 
-    # 2. Ab current user message save karo
+    # 2. Current user message save karo
     save_message(thread_id, "user", user_message)
 
     # 3. Clarification / refusal flow
@@ -280,18 +282,26 @@ def classify_source(data: dict):
         set_attempts(thread_id, attempts + 1)
         save_message(thread_id, "assistant", result.message_to_user)
         return {
-            "query": user_message,
+            "history": history,
+            "model_result": result,
             "action": result.action,
             "message_to_user": result.message_to_user,
-            "results": [],
+            "sources": [],
+            "reason": result.reason,
+            "answer": result.message_to_user,   # seedha user ko dikhane ke liye
         }
 
     # 4. Normal route: counter reset
     set_attempts(thread_id, 0)
-    response = route_query(user_message, result,history)
-    response["action"] = "route"
-    return response
 
+    return {
+        "history": history,
+        "model_result": result,        # route_query isko read karega
+        "action": "route",
+        "message_to_user": "",
+        "sources": result.sources,
+        "reason": result.reason,
+    }
 def chat_loop():
     thread_id = str(uuid.uuid4())   # har run ke liye nayi chat
     print("Chat started. Type 'stop' or 'exit' to end.\n")

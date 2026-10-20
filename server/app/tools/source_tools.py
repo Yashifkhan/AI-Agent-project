@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from tavily import TavilyClient
 from app.tools.vector_store import retrieve_relevant_data
+from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 load_dotenv()
 
@@ -11,11 +12,17 @@ tavily_client = TavilyClient(
 )
 
 
+nvidia_llm = ChatNVIDIA(
+    model="google/gemma-4-31b-it",
+)
+
 
 gemini_llm = ChatGoogleGenerativeAI(
     model=os.getenv("GEMINI_MODEL", "gemini-3.6-flash"),
     google_api_key=os.getenv("GEMINI_API_KEY"),
     temperature=0.3,
+    timeout=30,          # hang na ho
+    max_retries=1,
 )
 
 
@@ -159,7 +166,7 @@ def web_search_tool(query: str) -> str:
 # llm knowladge base tool
 def llm_knowledge_tool(query: str) -> str:
     """Answer general knowledge questions using Gemini."""
-    print("llm knowladge base ..")
+    # print("llm knowladge base ..",query)
 
     try:
         response = gemini_llm.invoke([
@@ -176,6 +183,7 @@ def llm_knowledge_tool(query: str) -> str:
         ])
 
         content = response.content
+        # print("llm knowladge base result ",content)
 
         if isinstance(content, str):
             return content.strip()
